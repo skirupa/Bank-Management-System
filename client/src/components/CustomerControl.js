@@ -64,13 +64,15 @@ const CustomerControl = ()=>{
 
     return (
 <div>
-    <div className='border '>
-    <h1 className='mt-5' style={{textAlign : 'center'}}>Customer Details</h1>
+    <div className='border p-5' style={{backgroundColor : '#006d77'}}>
+    <h1 className='mt-5' style={{textAlign : 'center', color : '#e5e5e5'}}>Customer Details</h1>
+    <hr style={{color : '#FFFFFF'}}></hr>
     <img src={avatar} alt='missing avatar' className='rounded mx-auto d-block'></img>
-    <h3 className='mt-5' style={{textAlign : 'center'}}>username@{username}</h3>
+    <h3 className='mt-5' style={{textAlign : 'center', color : '#e5e5e5'}}>username@{username}</h3>
     </div>
-<div className='container border mt-5 p-5'>
-<div className="input-group mb-3">
+<div className='container border mt-5 p-5' >
+<h2>Personal Details</h2>
+<div className="input-group mb-3 mt-3">
   <div className="input-group-prepend">
     <span className="input-group-text" id="basic-addon1">customerid@</span>
   </div>
@@ -139,7 +141,7 @@ const CustomerControl = ()=>{
 <div className="card shadow-lg p-3 mb-5 bg-white rounded collapse" id="AccountDetails" key = {account.account_id}>
 
 <hr className='mt-5'></hr>
-<h1 style={{textAlign : 'left'}}>Your Accounts</h1>
+<h1 style={{textAlign : 'left'}}>Savings Account</h1>
 <hr></hr>
   <div className="card-header">
     Account #{MyAccounts.indexOf(account)+1}
@@ -169,6 +171,7 @@ const CustomerControl = ()=>{
     <div className="input-group-append">
     </div>
   </div>
+  <button className='btn btn-info'>Transaction</button>
 </div>
 </div>
 ))}

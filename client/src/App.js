@@ -8,6 +8,7 @@ import EmployeeControl from './components/EmployeeControl';
 import PostEmployee from './components/AdminEmployee';
 import PostCustomer from './components/AdminCustomer';
 import CustomerControl from './components/CustomerControl';
+import PostBranch from './components/AdminBranch';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/employee' component = {EmployeeControl} />
         <Route path='/admin/employee' exact component = {PostEmployee} />
         <Route path='/admin/customer' exact component = {PostCustomer} />
+        <Route path='/admin/branch' exact component = {PostBranch} />
         <Route paath='/customer' exact component= {CustomerControl}/>
         
       </Switch>
