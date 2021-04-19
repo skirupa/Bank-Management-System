@@ -22,6 +22,16 @@ app.post('/customer', async(req,res)=>{
         console.error(err.message);
     }
 });
+app.delete('/customer/:customer_id',async(req,res)=>{
+    try {
+        const {customer_id} = req.params;
+        const query = await pool.query('delete from customer where customer_id=cast($1 as integer)',[customer_id]);
+        res.send(query.rows);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.post('/employee', async(req,res)=>{
     try {
         const {username,user_password} =req.body;
@@ -31,6 +41,17 @@ app.post('/employee', async(req,res)=>{
         console.error(err.message);
     }
 });
+app.delete('/employee/:username', async(req,res) =>{
+    try {
+        const {username} = req.params;
+        console.log(username);
+        const query = await pool.query('delete from emp_login where username = $1 returning *',[username]);
+        res.send(query);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.post('/accounts',async(req,res)=>{
     try {
         
@@ -41,6 +62,15 @@ app.post('/accounts',async(req,res)=>{
 
     } catch (err) {
         console.error(err.message);
+    }
+});
+app.delete('/accounts/:account_id',async(req,res)=>{
+    try {
+        const {account_id} = req.params;
+        const query = await pool.query('delete from accounts where account_id=cast($1 as integer)',[account_id]);
+        res.send(query.rows);
+    } catch (error) {
+        console.log(error);
     }
 });
 app.get('/accounts',async(req,res)=>{
@@ -63,11 +93,21 @@ app.get('/accounts/:customer_id', async(req,res)=>{
 });
 app.post('/branch',async(req,res)=>{
     try {
+        console.log(req.body);
         const {name,house_no,city,zip_code} = req.body;
         const query = await pool.query('call insert_into_branch($1,$2,$3,$4)',[name,house_no,city,zip_code]);
         res.send('Inserted record into Branch table...');
     } catch (err) {
         console.error(err.message);
+    }
+});
+app.delete('/branch/:branch_id',async(req,res)=>{
+    try {
+        const {branch_id} = req.params;
+        const query = await pool.query('delete from branch where branch_id=cast($1 as integer)',[branch_id]);
+        res.send(query.rows);
+    } catch (error) {
+        console.log(error);
     }
 });
 app.post('/transaction',async(req,res)=>{
@@ -79,6 +119,7 @@ app.post('/transaction',async(req,res)=>{
         
     }
 });
+
 
 //get
 
@@ -127,16 +168,7 @@ app.get('/customer/:username',async(req,res)=>{
         console.log(error);
     }
 });
-app.delete('/employee/:username', async(req,res) =>{
-    try {
-        const {username} = req.params;
-        console.log(username);
-        const query = await pool.query('delete from emp_login where username = $1 returning *',[username]);
-        res.send(query);
-    } catch (error) {
-        console.log(error);
-    }
-});
+
 
 
 

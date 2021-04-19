@@ -10,6 +10,18 @@ const PostCustomer = ()=>{
     const [zipcode,setZipCode] = useState('');
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
+
+    const DeleteCustomer = async(customer_id)=>{
+      try {
+        const query =  fetch(`http://localhost:5000/customer/${customer_id}`,{
+          method : 'DELETE'
+        });
+        console.log(query);
+      } catch (error) {
+        console.log(error);
+      }
+      setCustomers(AllCustomers.filter(cust => cust.customer_id!==customer_id));
+    };
     const PostCustomer = async()=> {
       try {
         const body = {name,phone,email,house_no,city,zipcode,username,password};
@@ -84,7 +96,8 @@ const PostCustomer = ()=>{
       <th scope="col">House No</th>
       <th scope="col">City</th>
       <th scope="col">Zip Code</th>
-      <th scope="col">~</th>
+      <th scope="col">Username</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -98,6 +111,7 @@ const PostCustomer = ()=>{
               <td>{customer.city}</td>
               <td>{customer.zipcode}</td>
               <td>{customer.username}</td>
+              <td><button className='btn btn-danger' onClick={()=>DeleteCustomer(customer.customer_id)}>Delete</button></td>
 
           </tr>
       ))}

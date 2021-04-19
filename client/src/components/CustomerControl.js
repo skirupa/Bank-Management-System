@@ -11,6 +11,18 @@ const CustomerControl = ()=>{
     const [username,setUsername] = useState('');
     const [MyAccounts,setAccounts] = useState([]);
     const [current_balance,setBalance] = useState('');
+    
+    const DeleteAccount = async(account_id)=>{
+      try {
+        const query = await fetch(`http://localhost:5000/accounts/${account_id}`,{
+          method : 'DELETE'
+        });
+        console.log(query);
+      } catch (error) {
+        console.log(error);
+      }
+      window.location.reload();
+    };
     const AddAccount = async()=>{
       const customer_id = document.getElementById('customer_id_value').value;
       const body = {customer_id,current_balance};
@@ -172,6 +184,7 @@ const CustomerControl = ()=>{
     </div>
   </div>
   <button className='btn btn-info'>Transaction</button>
+  <button className='btn btn-danger ml-3' onClick={()=>DeleteAccount(account.account_id)}>Delete</button>
 </div>
 </div>
 ))}

@@ -1,15 +1,15 @@
 import React, { useState, useEffect} from 'react';
 
 const PostBranch = ()=>{
-//    const [AllBranch,setBranch] = useState([]);
+    const [AllBranch,setBranch] = useState([]);
     const [name,setName] = useState('');
     const [house_no,setHouse] = useState('');
     const [city,setCity] = useState('');
-    const [zipcode,setZipCode] = useState('');
+    const [zip_code,setZipCode] = useState('');
     const PostBranch = async()=> {
       try {
-        const body = {name,house_no,city,zipcode};
-        const query = fetch('http://localhost:5000/----',{
+        const body = {name,house_no,city,zip_code};
+        const query = fetch('http://localhost:5000/branch',{
           method : 'POST',
           headers : {'Content-Type' : 'application/json'},
           body : JSON.stringify(body)
@@ -21,9 +21,9 @@ const PostBranch = ()=>{
     };
     const GetBranches = async()=> {
       try {
-        const get_cust = await fetch('http://localhost:5000/-----');
-        const data =await get_cust.json();
-//        setBranch(data);
+        const query = await fetch('http://localhost:5000/branch');
+        const data =await query.json();
+        setBranch(data);
         console.log(data);
     } catch (error) {
         console.log(error);
@@ -62,34 +62,28 @@ const PostBranch = ()=>{
 </div>
 <hr></hr>
           <div className='p-5'>
-<h1 style={{textAlign : 'center'}}>All Customers</h1>
+<h1 style={{textAlign : 'center'}}>All Branches</h1>
 <table className="table">
   <thead className="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Email</th>
+      <th scope="col">Branch Name</th>
       <th scope="col">House No</th>
       <th scope="col">City</th>
       <th scope="col">Zip Code</th>
-      <th scope="col">~</th>
+
     </tr>
   </thead>
   <tbody>
-  {/* {AllCustomers.map(customer => (
-          <tr key={customer.customer_id}>
-              <td>{customer.customer_id}</td>
-              <td>{customer.name}</td>
-              <td>{customer.phone}</td>
-              <td>{customer.email}</td>
-              <td>{customer.house_no}</td>
-              <td>{customer.city}</td>
-              <td>{customer.zipcode}</td>
-              <td>{customer.username}</td>
-
-          </tr>
-      ))} */}
+{AllBranch.map(branch => (
+  <tr key={branch.branch_id}>
+    <td>{branch.branch_id}</td>
+    <td>{branch.name}</td>
+    <td>{branch.house_no}</td>
+    <td>{branch.city}</td>
+    <td>{branch.zip_code}</td>
+  </tr>
+))}
   </tbody>
 </table>
 </div>

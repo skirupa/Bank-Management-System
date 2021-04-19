@@ -21,7 +21,7 @@ function App() {
         <Route path='/admin/employee' exact component = {PostEmployee} />
         <Route path='/admin/customer' exact component = {PostCustomer} />
         <Route path='/admin/branch' exact component = {PostBranch} />
-        <Route paath='/customer' exact component= {CustomerControl}/>
+        <Route path='/customer' exact component= {CustomerControl}/>
         
       </Switch>
     </Router>
