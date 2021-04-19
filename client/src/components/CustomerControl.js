@@ -1,5 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import avatar from '../images/avatar.png';
+
+
 const CustomerControl = ()=>{
     const [id,setID] = useState('');
     const [name,setName] = useState('');
@@ -149,7 +151,7 @@ const CustomerControl = ()=>{
 
 
 {MyAccounts.map(account => (
-
+<form action='http://localhost:3000/customer/transaction' method='GET'>
 <div className="card shadow-lg p-3 mb-5 bg-white rounded collapse" id="AccountDetails" key = {account.account_id}>
 
 <hr className='mt-5'></hr>
@@ -163,7 +165,7 @@ const CustomerControl = ()=>{
      <div className="input-group-prepend">
       <span className="input-group-text" id="basic-addon3">@account no</span>
      </div>
-     <input type="text" value={account.account_id} className="form-control" aria-describedby="basic-addon3" readOnly/>
+     <input type="text" value={account.account_id} name='account_no' className="form-control" aria-describedby="basic-addon3" readOnly/>
     </div>
 
   <div className="input-group mb-3">
@@ -179,14 +181,15 @@ const CustomerControl = ()=>{
     <div className="input-group-prepend">
       <span className="input-group-text">Date Opened</span>
     </div>
-    <input type="text" value={account.date_opened.substring(0,10) + '@'+ account.date_opened.substring(11,16)} className="form-control" aria-label="Amount (to the nearest dollar)" readOnly/>
+    <input type="text" value={account.date_opened.substring(0,10) + ' '+ account.date_opened.substring(11,16)} className="form-control" aria-label="Amount (to the nearest dollar)" readOnly/>
     <div className="input-group-append">
     </div>
   </div>
-  <button className='btn btn-info'>Transaction</button>
+  <button className='btn btn-info' type='submit'>Transaction</button>
   <button className='btn btn-danger ml-3' onClick={()=>DeleteAccount(account.account_id)}>Delete</button>
 </div>
 </div>
+</form>
 ))}
 
 </div>

@@ -32,10 +32,14 @@ $$
 INSERT INTO BRANCH VALUES (NEXTVAL('b_id_sequence'),nm,hn,cy,zc);
 $$;
 --------------
+
 CREATE OR REPLACE PROCEDURE insert_into_transaction(aid in varchar(50),bid in varchar(50),amt in varchar(50),acn in varchar(50))
 LANGUAGE SQL AS 	
 $$
 INSERT INTO TRANSACTION VALUES (NEXTVAL('t_id_sequence'),cast(aid as integer),cast(bid as integer),CURRENT_DATE, cast(amt as float(20)),acn);
+UPDATE accounts
+SET current_balance=current_balance+cast(amt as float)
+WHERE account_id = cast(aid as integer);
 $$;
 ----------
 
@@ -118,7 +122,7 @@ END;
 CREATE OR REPLACE TRIGGER deposit_balance
 AFTER INSERT ON TRANSACTION 
 FOR EACH ROW 
-WHEN (new.ACTION = 'Deposite')
+WHEN (new.ACTION = 'Deposit')
 
 DECLARE 
 		a_id NUMBER;

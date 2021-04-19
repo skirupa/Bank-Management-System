@@ -6,6 +6,18 @@ const PostBranch = ()=>{
     const [house_no,setHouse] = useState('');
     const [city,setCity] = useState('');
     const [zip_code,setZipCode] = useState('');
+    const DeleteBranch = async(branch_id) =>{
+        try {
+          const query = fetch(`http://localhost:5000/branch/${branch_id}`,{
+              method : 'DELETE'
+          });
+          console.log(query);
+          //etBranch(AllBranch.filter(branch=> branch.branch_id!==branch_id));
+        } catch (error) {
+          console.log(error.message);
+        }
+        window.location.reload();
+    };
     const PostBranch = async()=> {
       try {
         const body = {name,house_no,city,zip_code};
@@ -71,6 +83,7 @@ const PostBranch = ()=>{
       <th scope="col">House No</th>
       <th scope="col">City</th>
       <th scope="col">Zip Code</th>
+      <th scope="col"></th>
 
     </tr>
   </thead>
@@ -82,6 +95,7 @@ const PostBranch = ()=>{
     <td>{branch.house_no}</td>
     <td>{branch.city}</td>
     <td>{branch.zip_code}</td>
+    <td><button className = 'btn btn-danger' onClick={()=> DeleteBranch(branch.branch_id)}>Delete</button></td>
   </tr>
 ))}
   </tbody>

@@ -106,17 +106,19 @@ app.delete('/branch/:branch_id',async(req,res)=>{
         const {branch_id} = req.params;
         const query = await pool.query('delete from branch where branch_id=cast($1 as integer)',[branch_id]);
         res.send(query.rows);
+        console.log('Deleted from branch..');
     } catch (error) {
         console.log(error);
     }
 });
 app.post('/transaction',async(req,res)=>{
     try {
+        console.log(req.body);
         const {account_id,branch_id,amount,action} = req.body;
         const query = await pool.query('call insert_into_transaction($1,$2,$3,$4)',[account_id,branch_id,amount,action]);
         res.send('Inserted record into Transaction table...');       
     } catch (error) {
-        
+        console.log(req.query);   
     }
 });
 
