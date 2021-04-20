@@ -7,7 +7,7 @@ const LoginPage = ()=>{
 
     return(
 <div className="container p-5 mt-4"  style={{  justifyContent:'center', alignItems:'center', height: '100vh' ,textAlign : 'center', backgroundColor : '#edf2f4'}}>
-<h1 style={{textAlign : "center"}}>Enter Portal</h1>
+<h1 style={{textAlign : "center"}}>Welcome to Bank management sytem!!</h1>
 <table className="table">
   <tbody>
     <tr>

@@ -1,6 +1,7 @@
 import React from 'react';
 import customer from '../images/customer.png';
 import employee from '../images/employee.png';
+import branch from '../images/branch.png'
 import {useHistory} from 'react-router-dom';
 const EmployeeControl = ()=>{
     const history = useHistory();
@@ -40,7 +41,7 @@ const EmployeeControl = ()=>{
     <button className="btn btn-outline-warning float-right" height="100px" onClick = {()=>history.push('/admin/branch')}>Edit</button>
     </div>
   <div className="card-body pd-5">
-    <img src={employee} alt="employee not found" height="300px" className="rounded mx-auto d-block mt-4" />
+    <img src={branch} alt="branch not found" height="300px" className="rounded mx-auto d-block mt-4" />
   </div>
 </div>
 </td>

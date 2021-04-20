@@ -13,7 +13,7 @@ const CustomerControl = ()=>{
     const [username,setUsername] = useState('');
     const [MyAccounts,setAccounts] = useState([]);
     const [current_balance,setBalance] = useState('');
-    
+    const [Alltransaction,SetTransaction] = useState([]);
     const DeleteAccount = async(account_id)=>{
       try {
         const query = await fetch(`http://localhost:5000/accounts/${account_id}`,{
@@ -47,7 +47,17 @@ const CustomerControl = ()=>{
         console.log(error);
       }
     };
-
+    const GetTransactions = async()=>{
+      try {
+        const customer_id = document.getElementById('customer_id_value').value;
+        const query = await fetch(`http://localhost:5000/transaction/${customer_id}`);
+        const data = await query.json();
+        SetTransaction(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     const GetCustomer = async()=>{
         try {
             const parameters = window.location.search.substring(1).split("&");
@@ -134,6 +144,11 @@ const CustomerControl = ()=>{
 <button class="btn btn-outline-primary ml-3" type="button" data-toggle="collapse" data-target="#AccountDetails" aria-expanded="false" aria-controls="collapseExample" onClick={GetAccountDetails}>
     Get Account Details
   </button>
+
+  <button class="btn btn-success ml-3" onClick={GetTransactions} type="button" data-toggle="collapse" data-target="#alltransaction" aria-expanded="false" aria-controls="collapseExample">
+    View Transactions
+  </button>
+
 <div className="collapse" id="collapseExample">
 
 <div className="form-group shadow p-3 mb-5 bg-white rounded mt-3">
@@ -144,11 +159,37 @@ const CustomerControl = ()=>{
     
 <button className="btn btn-primary btn-lg mt-3" onClick={AddAccount}>Add</button>
 </div>
-
-
-  
 </div>
 
+<div class="collapse" id="alltransaction">
+  <div class="card card-body">
+    Your Transactions
+    <table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Account ID</th>
+      <th scope="col">Action</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Branch ID</th>
+      <th scope="col">Date of Transaction</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Alltransaction.map (t=>(
+      <tr key={t.transaction_id}>
+      <td>{t.transaction_id}</td>
+      <td>{t.account_id}</td>
+      <td>{t.action}</td>
+      <td>{t.amount}</td>
+      <td>{t.branch_id}</td>
+      <td>{t.date_of_transaction}</td></tr>
+    ))}
+  </tbody>
+</table>
+  </div>
+</div>
+  
 
 {MyAccounts.map(account => (
 <form action='http://localhost:3000/customer/transaction' method='GET'>

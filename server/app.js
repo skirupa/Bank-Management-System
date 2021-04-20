@@ -122,7 +122,16 @@ app.post('/transaction',async(req,res)=>{
     }
 });
 
-
+app.get('/transaction/:customer_id',async(req,res)=>{
+    try {
+        const {customer_id} =req.params;
+        const query = await pool.query('select transaction.*,accounts.customer_id from transaction left join accounts on accounts.account_id=transaction.account_id where accounts.customer_id=cast($1 as integer)',[customer_id]);
+        console.log(query.rows);
+        res.send(query.rows);
+    } catch (error) {
+        console.log(error);
+    }
+});
 //get
 
 app.get('/customer',async(req,res)=>{
